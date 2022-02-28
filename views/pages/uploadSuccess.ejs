@@ -7,10 +7,19 @@
         <%- include('../components/header'); %>
     </header>
     <body>
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <span>success!</span>
+        <div class="jumbotron">
+            <h1 class="display-4">AES Image Encryption</h1>
+            <div class="container">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="alert alert-success" role="alert"> Success! Image Encrypted. Copy the below string to your recipient.</div>
+                    </div>
+                    <div class="col-6">
+                        <button class="btn btn-primary my-2" id="copyString">Copy</button>
+                    </div>
+                    <div class="col-12">
+                        <textarea class="form-control" rows="10">TESTING</textarea>
+                    </div>
                 </div>
             </div>
         </div>
