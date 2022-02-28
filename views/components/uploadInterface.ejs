@@ -1,0 +1,33 @@
+<h3>Upload</h3>
+
+<form id="uploadForm" enctype="multipart/form-data">
+    <div class="row">
+        <div class="col-12 form-group">
+            <label for="file">Upload your image here:</label>
+            <input type="file" name="file">
+        </div>
+        <div class="col-12 form-group">
+            <label for="keySize">Key size:</label>
+            <select class="form-control" name="keySize" id="keySize">
+                <option value=128>128 bit</option>
+                <option value=192>192 bit</option>
+                <option selected value=256>256 bit</option>
+            </select>
+        </div>
+        <div class="col-12 form-group">
+            <label for="modeOfOperation">Mode of operation:</label>
+            <select class="form-control" name="modeOfOperation" id="modeOfOperation">
+                <option selected value="CBC">CBC</option>
+                <option value="CFB">CFB</option>
+                <option value="CTR">CTR</option>
+                <option value="ECB">ECB</option>
+                <option value="OFB">OFB</option>
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <button class="btn btn-primary" id="form_submit">Submit</button>
+        </div>
+    </div>
+</form>

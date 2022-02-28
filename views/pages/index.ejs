@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('../components/head'); %>
+</head>
+    <header>
+        <%- include('../components/header'); %>
+    </header>
+    <body>
+        <div class="jumbotron">
+            <h1 class="display-4">ImageEncryption</h1>
+            <p class="lead">This is an image encrption application using Advanced Encryption Standards (AES) algorithm.</p>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <%- include('../components/uploadInterface') %>
+                </div>
+                <div class="col-lg-6">
+                    <%- include('../components/downloadInterface') %>
+                </div>
+            </div>
+        </div>
+    </body>
+        <%- include('../components/foot'); %>
+</html>
