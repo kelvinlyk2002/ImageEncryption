@@ -11,7 +11,18 @@ module.exports = function (app) {
         res.render("pages/index");
     });
 
-    app.post("/", upload.single('image'), function(req, res){
+    app.post("/encrypt", upload.single('image'), function(req, res){
+        let imgBitstring = req.file.buffer.toString('base64');
+        let inputKey = req.body.key;
+        try{
+            encrypted = AESCBCEncrypt(inputKey, imgBitstring);
+            res.render("pages/uploadSuccess", { success: true, output: encrypted });
+        } catch (e) {
+            res.render("pages/uploadSuccess", { success: false, output: e });
+        }
+    });
+
+    app.post("/decrypt", function(req, res){
         let imgBitstring = req.file.buffer.toString('base64');
         let inputKey = req.body.key;
         try{

@@ -33,4 +33,21 @@
         </div>
     </body>
         <%- include('../components/foot'); %>
+        <script>
+        // page specific scripts
+        $("#copyString").click(function(){
+            $("#outputString").select();
+            document.execCommand("copy");
+        })
+
+        $("#downloadString").click(function(){
+            var element = document.createElement('a');
+            element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent($("#outputString").val()));
+            element.setAttribute('download', "encryptedImage");
+            element.style.display = 'none';
+            document.body.appendChild(element);
+            element.click();
+            document.body.removeChild(element);
+        })
+        </script>
 </html>
