@@ -11,15 +11,22 @@
             <h1 class="display-4">AES Image Encryption</h1>
             <div class="container">
                 <div class="row">
+                    <% if(success){ %>
                     <div class="col-6">
                         <div class="alert alert-success" role="alert"> Success! Image Encrypted. Copy the below string to your recipient.</div>
                     </div>
+                    <% } else { %>
+                    <div class="col-6">
+                        <div class="alert alert-danger" role="alert">Error</div>
+                    </div>
+                    <% } %>
                     <div class="col-6">
                         <button class="btn btn-primary my-2" id="copyString">Copy String</button>
-                        <button class="btn btn-primary my-2" id="copyString">Download as .txt file</button>
+                        <button class="btn btn-primary my-2" id="downloadString">Download as .txt file</button>
+                        <button class="btn btn-secondary my-2" id="backHome">Return to homepage</button>
                     </div>
                     <div class="col-12">
-                        <textarea class="form-control" rows="10"><%= imgBitstring %></textarea>
+                        <textarea class="form-control" rows="50" id="outputString" readonly><%= output %></textarea>
                     </div>
                 </div>
             </div>
