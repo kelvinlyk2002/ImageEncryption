@@ -54,10 +54,11 @@ function AESCBC(key, text, direction){
         // cryptor
         let aesCbc = new aesjs.ModeOfOperation.cbc(keyArray, iv);
         if(direction == "encrypt"){
-            // padding to a multiple of 16 bytes
+            // padding to a multiple of 16 bytes, adding custom padding
             for(var i=0; i < text.length % 16 ; i++){
-                text += "=";
+                text += "|";
             }
+            console.log(text.slice(-20));
             // encrypt
             let textBytes = aesjs.utils.utf8.toBytes(text);
             let encryptedBytes = aesCbc.encrypt(textBytes);
@@ -68,6 +69,8 @@ function AESCBC(key, text, direction){
             let encryptedBytes = aesjs.utils.hex.toBytes(text);
             let decryptedBytes = aesCbc.decrypt(encryptedBytes);
             let decryptedText = aesjs.utils.utf8.fromBytes(decryptedBytes);
+            // removing custom padding
+            decryptedText = decryptedText.replaceAll("|","");
             return decryptedText;
         } else {
             throw "error";
