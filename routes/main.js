@@ -54,6 +54,10 @@ function AESCBC(key, text, direction){
         // cryptor
         let aesCbc = new aesjs.ModeOfOperation.cbc(keyArray, iv);
         if(direction == "encrypt"){
+            // padding to a multiple of 16 bytes
+            for(var i=0; i < text.length % 16 ; i++){
+                text += "=";
+            }
             // encrypt
             let textBytes = aesjs.utils.utf8.toBytes(text);
             let encryptedBytes = aesCbc.encrypt(textBytes);
