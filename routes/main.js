@@ -58,7 +58,6 @@ function AESCBC(key, text, direction){
             for(var i=0; i < text.length % 16 ; i++){
                 text += "|";
             }
-            console.log(text.slice(-20));
             // encrypt
             let textBytes = aesjs.utils.utf8.toBytes(text);
             let encryptedBytes = aesCbc.encrypt(textBytes);
