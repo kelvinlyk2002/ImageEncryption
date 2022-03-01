@@ -15,7 +15,7 @@ module.exports = function (app) {
         let imgBitstring = req.file.buffer.toString('base64');
         let inputKey = req.body.key;
         try{
-            encrypted = AESCBCEncrypt(inputKey, imgBitstring);
+            encrypted = AESCBC(inputKey, imgBitstring, "encrypt");
             res.render("pages/uploadSuccess", { success: true, output: encrypted });
         } catch (e) {
             res.render("pages/uploadSuccess", { success: false, output: e });
@@ -23,22 +23,18 @@ module.exports = function (app) {
     });
 
     app.post("/decrypt", function(req, res){
-        let imgBitstring = req.file.buffer.toString('base64');
+        let inputEncryptedString = req.body.inputEncryptedString;
         let inputKey = req.body.key;
         try{
-            encrypted = AESCBCEncrypt(inputKey, imgBitstring);
-            res.render("pages/uploadSuccess", { success: true, output: encrypted });
+            decrypted = AESCBC(inputKey, inputEncryptedString, "decrypt");
+            res.render("pages/decryptSuccess", { success: true, output: decrypted });
         } catch (e) {
-            res.render("pages/uploadSuccess", { success: false, output: e });
+            res.render("pages/decryptSuccess", { success: false, output: e });
         }
     });
-
-    app.get("/decryptSuccess",function(req, res){
-        res.render("pages/decryptSuccess");
-    })
 }
 
-function AESCBCEncrypt(key, text){
+function AESCBC(key, text, direction){
     const hash = crypto.createHmac('sha256', 'AESApplicationSalt').update(key).digest('hex');
     let hashArray = hash.split("");
     let keyArray = [];
@@ -55,11 +51,22 @@ function AESCBCEncrypt(key, text){
         for(var i = 0; i<iv.length; i++){
             iv[i] = parseInt(iv[i], 16);
         }
-        // encrypt
-        let textBytes = aesjs.utils.utf8.toBytes(text);
-        var aesCbc = new aesjs.ModeOfOperation.cbc(keyArray, iv);
-        var encryptedBytes = aesCbc.encrypt(textBytes);
-        var encryptedHex = aesjs.utils.hex.fromBytes(encryptedBytes);
-        return encryptedHex;
+        // cryptor
+        let aesCbc = new aesjs.ModeOfOperation.cbc(keyArray, iv);
+        if(direction == "encrypt"){
+            // encrypt
+            let textBytes = aesjs.utils.utf8.toBytes(text);
+            let encryptedBytes = aesCbc.encrypt(textBytes);
+            let encryptedHex = aesjs.utils.hex.fromBytes(encryptedBytes);
+            return encryptedHex;
+        } else if (direction == "decrypt"){
+            // decrypt
+            let encryptedBytes = aesjs.utils.hex.toBytes(text);
+            let decryptedBytes = aesCbc.decrypt(encryptedBytes);
+            let decryptedText = aesjs.utils.utf8.fromBytes(decryptedBytes);
+            return decryptedText;
+        } else {
+            throw "error";
+        }
     }
 }

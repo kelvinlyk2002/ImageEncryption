@@ -1,9 +1,9 @@
 <h3>Decrypt & Download</h3>
 
-<form id="downloadForm" enctype="multipart/form-data">
+<form method="post" id="downloadForm" action="/decrypt">
     <div class="row">
-        <div class="form-group col-12">
-            <textarea class="form-control" name="encryptedString" placeholder="Enter your encrypted string" rows="5"></textarea>
+        <div class="col-12 form-group">
+            <textarea class="form-control" name="inputEncryptedString" placeholder="Enter your encrypted string" rows="8"></textarea>
         </div>
         <div class="col-12 form-group">
             <label for="keySize">Key:</label>

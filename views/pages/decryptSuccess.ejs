@@ -11,18 +11,36 @@
             <h1 class="display-4">AES Image Encryption</h1>
             <div class="container">
                 <div class="row">
-                    <div class="col-6">
-                        <div class="alert alert-success" role="alert"> Success! Image Decrypted. </div>
-                    </div>
+                    <% if(success){ %>
+                        <div class="col-6">
+                            <div class="alert alert-success" role="alert"> Success! Image Decrypted.</div>
+                        </div>
+                        <% } else { %>
+                        <div class="col-6">
+                            <div class="alert alert-danger" role="alert">Error</div>
+                        </div>
+                        <% } %>
                     <div class="col-6">
                         <button class="btn btn-primary my-2" id="saveImage">Save Image</button>
+                        <button class="btn btn-secondary my-2" id="backHome">Return to homepage</button>
                     </div>
                     <div class="col-12">
-                        <img src="https://upload.wikimedia.org/wikipedia/en/7/7d/Lenna_%28test_image%29.png">
+                        <img id="decryptedImage" src="data:image/jpeg;base64,<%= output %>"}>
                     </div>
                 </div>
             </div>
         </div>
     </body>
         <%- include('../components/foot'); %>
+        <script>
+        $("#saveImage").click(function(){
+            var element = document.createElement('a');
+            element.setAttribute('href', 'data:image/jpeg;base64,<%= output %>');
+            element.setAttribute('download', "dencryptedImage");
+            element.style.display = 'none';
+            document.body.appendChild(element);
+            element.click();
+            document.body.removeChild(element);
+        })
+        </script>
 </html>
