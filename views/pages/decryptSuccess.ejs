@@ -13,7 +13,7 @@
                 <div class="row">
                     <% if(success){ %>
                         <div class="col-6">
-                            <div class="alert alert-success" role="alert"> Success! Image Decrypted.</div>
+                            <div class="alert alert-success" role="alert"> You should see the image below if your key is correct.</div>
                         </div>
                         <% } else { %>
                         <div class="col-6">
@@ -36,7 +36,7 @@
         $("#saveImage").click(function(){
             var element = document.createElement('a');
             element.setAttribute('href', 'data:image/jpeg;base64,<%= output %>');
-            element.setAttribute('download', "dencryptedImage");
+            element.setAttribute('download', "decryptedImage");
             element.style.display = 'none';
             document.body.appendChild(element);
             element.click();

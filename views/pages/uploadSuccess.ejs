@@ -12,8 +12,12 @@
             <div class="container">
                 <div class="row">
                     <% if(success){ %>
-                    <div class="col-6">
-                        <div class="alert alert-success" role="alert"> Success! Image Encrypted. Copy the below string to your recipient.</div>
+                    <div id="loadingBanner" class="col-6">
+                        <div class="alert alert-warning" role="alert"> Encrypting...</div>
+                    </div>
+    
+                    <div id="completionBanner" class="col-6" hidden>
+                        <div class="alert alert-success" role="alert"> Success! Image encrypted. Copy the below string to your recipient.</div>
                     </div>
                     <% } else { %>
                     <div class="col-6">
@@ -21,12 +25,12 @@
                     </div>
                     <% } %>
                     <div class="col-6">
-                        <button class="btn btn-primary my-2" id="copyString">Copy String</button>
-                        <button class="btn btn-primary my-2" id="downloadString">Download as .txt file</button>
+                        <button class="btn btn-primary my-2" id="copyString" hidden>Copy String</button>
+                        <button class="btn btn-primary my-2" id="downloadString" hidden>Download as .txt file</button>
                         <button class="btn btn-secondary my-2" id="backHome">Return to homepage</button>
                     </div>
                     <div class="col-12">
-                        <textarea class="form-control" rows="50" id="outputString" readonly><%= output %></textarea>
+                        <textarea class="form-control" rows="50" id="outputString" readonly hidden><%= output %></textarea>
                     </div>
                 </div>
             </div>
@@ -35,11 +39,24 @@
         <%- include('../components/foot'); %>
         <script>
         // page specific scripts
+        // hide outputs and buttons before page completes loading
+        $(document).ready(function(){
+            $("#outputString").removeAttr("hidden");
+            <% if(success){ %>
+                $("#copyString").removeAttr("hidden");
+                $("#downloadString").removeAttr("hidden");
+                $("#completionBanner").removeAttr("hidden");
+                $("#loadingBanner").hide();
+            <% } %>
+        });
+
+        // copy button
         $("#copyString").click(function(){
             $("#outputString").select();
             document.execCommand("copy");
         })
 
+        // download button
         $("#downloadString").click(function(){
             var element = document.createElement('a');
             element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent($("#outputString").val()));

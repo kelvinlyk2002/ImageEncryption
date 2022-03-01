@@ -3,13 +3,13 @@
 <form method="post" id="uploadForm" enctype="multipart/form-data" action="/encrypt">
     <div class="row">
         <div class="col-12 form-group">
-            <label for="file">Upload your image here: (accepts .JPG, .JPEG only)</label>
-            <input type="file" name="image" accept="image/jpeg">
-            <small class="form-text text-muted">Max 1MB</small>
+            <label for="file">Upload your image here:</label>
+            <input type="file" name="image" accept="image/jpeg" required>
+            <small class="form-text text-muted">.JPG, .JPEG only</small>
         </div>
         <div class="col-12 form-group">
             <label for="keySize">Key:</label>
-            <input type="text" class="form-control" name="key" required>
+            <input type="text" class="form-control" name="key" required placeholder="Set a key and share with your recipient">
         </div>
     </div>
     <div class="row">
