@@ -69,7 +69,7 @@ function AESCBC(key, text, direction){
             let decryptedBytes = aesCbc.decrypt(encryptedBytes);
             let decryptedText = aesjs.utils.utf8.fromBytes(decryptedBytes);
             // removing custom padding
-            decryptedText = decryptedText.replaceAll("|","");
+            decryptedText = decryptedText.replace(/|/g,"");
             return decryptedText;
         } else {
             throw "error";
