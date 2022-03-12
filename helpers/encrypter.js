@@ -18,7 +18,7 @@ const AESCBC =  (key, text, direction) => {
         for(var i = 0; i<iv.length; i++){
             iv[i] = parseInt(iv[i], 16);
         }
-        // cryptor
+        // AES cipher in CBC mode of operation
         let aesCbc = new aesjs.ModeOfOperation.cbc(keyArray, iv);
         if(direction == "encrypt"){
             // padding to a multiple of 16 bytes, adding custom padding
@@ -37,7 +37,6 @@ const AESCBC =  (key, text, direction) => {
             let decryptedText = aesjs.utils.utf8.fromBytes(decryptedBytes);
             // removing custom padding
             decryptedText = decryptedText.replace(/\|/g,"");
-            console.log(decryptedText);
             return decryptedText;
         } else {
             throw "error";
