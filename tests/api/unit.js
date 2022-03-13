@@ -96,4 +96,43 @@ describe('Decryption', () => {
         //Assert
         expect(data).to.equal(decrypted)
     });
+
+    it('the encrypted image should not match the image when decrypted with different key - testimage1.jpg', () => {
+
+        //Arrange
+        const data = fs.readFileSync(`${__dirname}/testimage1.jpg`, {encoding: 'base64'})
+
+        //Act
+        const encrypted = encryption.AESCBC('1234567890123456', data, "encrypt")
+        const decrypted = encryption.AESCBC('123', encrypted, "decrypt")
+
+        //Assert
+        expect(data).to.not.equal(decrypted)
+    });
+
+    it('the encrypted image should not match the image when decrypted with different key - testimage2.jpg', () => {
+
+        //Arrange
+        const data = fs.readFileSync(`${__dirname}/testimage2.jpg`, {encoding: 'base64'})
+
+        //Act
+        const encrypted = encryption.AESCBC('1234567890123456', data, "encrypt")
+        const decrypted = encryption.AESCBC('123', encrypted, "decrypt")
+
+        //Assert
+        expect(data).to.not.equal(decrypted)
+    });
+
+    it('the encrypted image should not match the image when decrypted with different key - testimage3.jpg', () => {
+
+        //Arrange
+        const data = fs.readFileSync(`${__dirname}/testimage3.jpg`, {encoding: 'base64'})
+
+        //Act
+        const encrypted = encryption.AESCBC('1234567890123456', data, "encrypt")
+        const decrypted = encryption.AESCBC('123', encrypted, "decrypt")
+
+        //Assert
+        expect(data).to.not.equal(decrypted)
+    });
 })
