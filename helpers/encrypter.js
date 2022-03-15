@@ -39,7 +39,7 @@ const AESCBC =  (key, text, direction) => {
             decryptedText = decryptedText.replace(/\|/g,"");
             return decryptedText;
         } else {
-            throw "error";
+            throw "Parameters error - only 'encrypt' or 'decrypt' accepted";
         }
     }
 }
